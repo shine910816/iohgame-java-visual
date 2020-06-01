@@ -18,6 +18,21 @@ public class VisualWindow extends JFrame
         setResizable(resizeAble);
     }
 
+    public VisualWindow add(VisualPanel panel)
+    {
+        add(panel);
+        return this;
+    }
+
+    public VisualWindow adds(VisualPanel... panels)
+    {
+        for (VisualPanel panel : panels)
+        {
+            add(panel);
+        }
+        return this;
+    }
+
     public void disp()
     {
         setVisible(true);
