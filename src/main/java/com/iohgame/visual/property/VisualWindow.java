@@ -2,13 +2,15 @@ package com.iohgame.visual.property;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 
 public class VisualWindow extends JFrame
 {
     private static final long serialVersionUID = 1L;
+    private VisualScrollPane m_scroll = null;
 
-    public VisualWindow(String title, int width, int height, boolean resizeAble)
+    private VisualWindow(String title, int width, int height, boolean resizeAble)
     {
         super(title);
         setSize(width, height);
@@ -18,18 +20,18 @@ public class VisualWindow extends JFrame
         setResizable(resizeAble);
     }
 
-    public VisualWindow add(VisualPanel panel)
+    public VisualWindow addComponent(VisualPanel panel)
     {
         add(panel);
         return this;
     }
 
-    public VisualWindow adds(VisualPanel... panels)
+    public VisualWindow addScrollPane(VisualPanel panel)
     {
-        for (VisualPanel panel : panels)
-        {
-            add(panel);
-        }
+        m_scroll = VisualScrollPane.getInstance(panel);
+        m_scroll.getVerticalScrollBar().setUnitIncrement(25);
+        m_scroll.getHorizontalScrollBar().setUnitIncrement(25);
+        add(m_scroll);
         return this;
     }
 
