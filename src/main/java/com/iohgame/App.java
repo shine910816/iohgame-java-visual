@@ -37,30 +37,25 @@ public class App extends MainClass
             {
                 panel.setCons(0, i, 1, 1, 1, 0).addTextLabel(weapon.getName());
                 panel.setCons(1, i, 1, 1, 1, 0).addTextLabel("Lv."+w.level().toString());
-                panel.setCons(2, i, 1, 1, 1, 0).addTextLabel(w.stats().defeats() + "");
-                panel.setCons(3, i, 1, 1, 1, 0).addTextLabel(w.stats().mostDefeatsInAGame() + "");
-                panel.setCons(4, i, 1, 1, 1, 0).addTextLabel(Math.floor(w.stats().damagePlayer()) + "");
-                panel.setCons(5, i, 1, 1, 1, 0).addTextLabel(Math.floor(w.stats().mostDamagePlayerInAGame()) + "");
-                panel.setCons(6, i, 1, 1, 1, 0).addTextLabel(Math.floor(w.stats().longestDefeat()) + "m");
-                panel.setCons(7, i, 1, 1, 1, 0).addTextLabel(w.stats().longRangeDefeats() + "");
-                panel.setCons(8, i, 1, 1, 1, 0).addTextLabel(w.stats().kills() + "");
-                panel.setCons(9, i, 1, 1, 1, 0).addTextLabel(w.stats().mostKillsInAGame() + "");
-                panel.setCons(10, i, 1, 1, 1, 0).addTextLabel(w.stats().groggies() + "");
-                panel.setCons(11, i, 1, 1, 1, 0).addTextLabel(w.stats().mostGroggiesInAGame() + "");
+                panel.setCons(2, i, 1, 1, 1, 0).addTextLabel(w.tier().getName());
+                panel.setCons(3, i, 1, 1, 1, 0).addTextLabel(w.stats().defeats() + "");
+                panel.setCons(4, i, 1, 1, 1, 0).addTextLabel(w.stats().mostDefeatsInAGame() + "");
+                panel.setCons(5, i, 1, 1, 1, 0).addTextLabel(Math.floor(w.stats().damagePlayer()) + "");
+                panel.setCons(6, i, 1, 1, 1, 0).addTextLabel(Math.floor(w.stats().mostDamagePlayerInAGame()) + "");
+                panel.setCons(7, i, 1, 1, 1, 0).addTextLabel(Math.floor(w.stats().longestDefeat()) + "m");
+                panel.setCons(8, i, 1, 1, 1, 0).addTextLabel(w.stats().longRangeDefeats() + "");
+                panel.setCons(9, i, 1, 1, 1, 0).addTextLabel(w.stats().kills() + "");
+                panel.setCons(10, i, 1, 1, 1, 0).addTextLabel(w.stats().mostKillsInAGame() + "");
+                panel.setCons(11, i, 1, 1, 1, 0).addTextLabel(w.stats().groggies() + "");
+                panel.setCons(12, i, 1, 1, 1, 0).addTextLabel(w.stats().mostGroggiesInAGame() + "");
             }
             else {
                 panel.setCons(0, i, 1, 1, 1, 0).addTextLabel(weapon.getName());
                 panel.setCons(1, i, 1, 1, 1, 0).addTextLabel("Lv.0");
-                panel.setCons(2, i, 1, 1, 1, 0).addTextLabel("0");
-                panel.setCons(3, i, 1, 1, 1, 0).addTextLabel("0");
-                panel.setCons(4, i, 1, 1, 1, 0).addTextLabel("0");
-                panel.setCons(5, i, 1, 1, 1, 0).addTextLabel("0");
-                panel.setCons(6, i, 1, 1, 1, 0).addTextLabel("0");
-                panel.setCons(7, i, 1, 1, 1, 0).addTextLabel("0");
-                panel.setCons(8, i, 1, 1, 1, 0).addTextLabel("0");
-                panel.setCons(9, i, 1, 1, 1, 0).addTextLabel("0");
-                panel.setCons(10, i, 1, 1, 1, 0).addTextLabel("0");
-                panel.setCons(11, i, 1, 1, 1, 0).addTextLabel("0");
+                panel.setCons(2, i, 1, 1, 1, 0).addTextLabel("无");
+                for(int cols=3;cols<=12;cols++) {
+                    panel.setCons(cols, i, 1, 1, 1, 0).addTextLabel("0");
+                }
             }
             i++;
         }
