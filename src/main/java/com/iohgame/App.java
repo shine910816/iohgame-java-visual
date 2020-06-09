@@ -3,6 +3,7 @@ package com.iohgame;
 import java.util.EnumSet;
 
 import com.iohgame.framework.utility.MainClass;
+import com.iohgame.framework.utility.Utility;
 import com.iohgame.service.pubg.PubgServiceImpl;
 import com.iohgame.service.pubg.property.Weapon;
 import com.iohgame.service.pubg.property.WeaponMasteryDao;
@@ -22,11 +23,12 @@ public class App extends MainClass
         PubgService pubg = new PubgServiceImpl();
         WeaponMastery uw = pubg.weaponMastery(accountId);
         VisualPanel panel = VisualPanel.getGridBagLayoutPanel();
-        panel.setCons(0, 0, 1, 1, 1, 0).addTextLabel("枪械名");
-        panel.setCons(1, 0, 1, 1, 1, 0).addTextLabel("等级");
-        // panel.setCons(2, 0, 1, 1, 1, 0).addTextLabel("击败");
-        // panel.setCons(3, 0, 1, 1, 1, 0).addTextLabel("伤害");
-        int i = 1;
+        String[] titleColsContent = "枪械名,等级,进阶,总击败,单场最高击败,总伤害,单场最高伤害,最远击败距离,远距离击败数,总击杀,单场最高击杀,总击倒,单场最高击倒".split(",");
+        for (int titleCols = 0; titleCols < titleColsContent.length; titleCols++)
+        {
+            panel.setCons(titleCols, 0, 1, 1, 1, 0).addTextLabel(titleColsContent[titleCols]);
+        }
+        int line = 1;
         EnumSet<Weapon> enumList = EnumSet.allOf(Weapon.class);
         for (Weapon weapon : enumList)
         {
@@ -35,30 +37,31 @@ public class App extends MainClass
 
             if (w != null)
             {
-                panel.setCons(0, i, 1, 1, 1, 0).addTextLabel(weapon.getName());
-                panel.setCons(1, i, 1, 1, 1, 0).addTextLabel("Lv." + w.level().toString());
-                panel.setCons(2, i, 1, 1, 1, 0).addTextLabel(w.stats().defeats() + "");
-                panel.setCons(3, i, 1, 1, 1, 0).addTextLabel(w.stats().mostDefeatsInAGame() + "");
-                panel.setCons(4, i, 1, 1, 1, 0).addTextLabel(Math.floor(w.stats().damagePlayer()) + "");
-                panel.setCons(5, i, 1, 1, 1, 0).addTextLabel(Math.floor(w.stats().mostDamagePlayerInAGame()) + "");
-                panel.setCons(6, i, 1, 1, 1, 0).addTextLabel(Math.floor(w.stats().longestDefeat()) + "m");
-                panel.setCons(7, i, 1, 1, 1, 0).addTextLabel(w.stats().longRangeDefeats() + "");
-                panel.setCons(8, i, 1, 1, 1, 0).addTextLabel(w.stats().kills() + "");
-                panel.setCons(9, i, 1, 1, 1, 0).addTextLabel(w.stats().mostKillsInAGame() + "");
-                panel.setCons(10, i, 1, 1, 1, 0).addTextLabel(w.stats().groggies() + "");
-                panel.setCons(11, i, 1, 1, 1, 0).addTextLabel(w.stats().mostGroggiesInAGame() + "");
+                panel.setCons(0, line, 1, 1, 1, 0).addTextLabel(weapon.getName());
+                panel.setCons(1, line, 1, 1, 1, 0).addTextLabel("Lv." + w.level().toString());
+                panel.setCons(2, line, 1, 1, 1, 0).addTextLabel(w.tier().getName());
+                panel.setCons(3, line, 1, 1, 1, 0).addTextLabel(w.stats().defeats() + "");
+                panel.setCons(4, line, 1, 1, 1, 0).addTextLabel(w.stats().mostDefeatsInAGame() + "");
+                panel.setCons(5, line, 1, 1, 1, 0).addTextLabel(Utility.doubleFloor(w.stats().damagePlayer()) + "");
+                panel.setCons(6, line, 1, 1, 1, 0).addTextLabel(Utility.doubleFloor(w.stats().mostDamagePlayerInAGame()) + "");
+                panel.setCons(7, line, 1, 1, 1, 0).addTextLabel(Utility.doubleFloor(w.stats().longestDefeat()) + "");
+                panel.setCons(8, line, 1, 1, 1, 0).addTextLabel(w.stats().longRangeDefeats() + "");
+                panel.setCons(9, line, 1, 1, 1, 0).addTextLabel(w.stats().kills() + "");
+                panel.setCons(10, line, 1, 1, 1, 0).addTextLabel(w.stats().mostKillsInAGame() + "");
+                panel.setCons(11, line, 1, 1, 1, 0).addTextLabel(w.stats().groggies() + "");
+                panel.setCons(12, line, 1, 1, 1, 0).addTextLabel(w.stats().mostGroggiesInAGame() + "");
             }
             else
             {
-                panel.setCons(0, i, 1, 1, 1, 0).addTextLabel(weapon.getName());
-                panel.setCons(1, i, 1, 1, 1, 0).addTextLabel("Lv.0");
-                for (int cols = 2; cols < 12; cols++)
+                panel.setCons(0, line, 1, 1, 1, 0).addTextLabel(weapon.getName());
+                panel.setCons(1, line, 1, 1, 1, 0).addTextLabel("Lv.0");
+                panel.setCons(2, line, 1, 1, 1, 0).addTextLabel("无");
+                for (int cols = 3; cols <= 12; cols++)
                 {
-                    panel.setCons(cols, i, 1, 1, 1, 0).addTextLabel("0");
+                    panel.setCons(cols, line, 1, 1, 1, 0).addTextLabel("0");
                 }
-
             }
-            i++;
+            line++;
         }
         VisualWindow.getInstance("Weapon mastery for " + accountId).addScrollPane(panel).disp();
     }
